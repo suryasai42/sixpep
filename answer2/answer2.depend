@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1608896084 source:c:\users\n s s k vamsi\desktop\sixpep\answer2\main.cpp
+	<iostream>
+	<sstream>
+	<string>
+	<cstdlib>
+	<time.h>
+	<fstream>
+	<algorithm>
+
