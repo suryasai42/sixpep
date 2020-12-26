@@ -266,7 +266,7 @@ bool findString(string str1, string str2)
 bool compute(string Condition)
 {
 	int value = 0;
-	int argumentIndex = -1;
+	int argumentIndex = 0;
 	// Identify the column(id/name/age/city) specified by user in query
 	if (findString(Condition ,"Id"))
 		argumentIndex = 0;
@@ -276,41 +276,39 @@ bool compute(string Condition)
 		argumentIndex = 2;
 	else if (findString(Condition, "city"))
 		argumentIndex = 3;
-	else
-	{
-		// Throw an exception if user input is invalid
-		cout << "User specified column is not valid. Please check the query" << endl;
-		exception ex;
-		throw (ex);
-	}
 
 	// Identify the operator in the condition and evaluate accordingly
 	// Evaluates = operator
-	int pos = Condition.find('=');
-	if (pos > 0)
+	int pos1 = Condition.find('=');
+	if (pos1 > 0)
 	{
-		string value = Condition.substr(pos + 1);
+		string value = Condition.substr(pos1 + 1);
 		if (checkEqual(values[argumentIndex], value) == 0)
 			return true;
 		return false;
 	}
 	// Evaluates < operator
-	pos = Condition.find('<');
-	if (pos > 0)
+	int pos2 = Condition.find('<');
+	if (pos2 > 0)
 	{
-		if (checkEqual(values[argumentIndex], Condition.substr(pos + 1)) < 0)
+		if (checkEqual(values[argumentIndex], Condition.substr(pos2 + 1)) < 0)
 			return true;
 		return false;
 	}
 	// Evaluates > operator
-	pos = Condition.find('>');
-	if (pos > 0)
+	int pos3 = Condition.find('>');
+	if (pos3 > 0)
 	{
-		string value = Condition.substr(pos + 1);
+		string value = Condition.substr(pos3 + 1);
 		if (checkEqual(values[argumentIndex], value) > 0)
 			return true;
 		return false;
 	}
+	if(pos1 < 0 && pos2 < 0 && pos3 < 0)
+    {
+        if(values[argumentIndex] == Condition)
+            return true;
+    }
 	return false;
 
 }
